@@ -1,5 +1,7 @@
 import lldb
 import threading
+from signal import SIGUSR1, SIGUSR2
+
 
 class ProcessEventListener(threading.Thread):
     def __init__(self, debugger):
@@ -11,7 +13,8 @@ class ProcessEventListener(threading.Thread):
     
     def _suppress_signals(self, process):
         signals = process.GetUnixSignals()
-        signals.SetShouldStop(11, False)
+        signals.SetShouldStop(SIGUSR1, False)
+        signals.SetShouldStop(SIGUSR2, False)
 
     def run(self):
         while True:
