@@ -11,7 +11,8 @@ class ProcessEventListener(threading.Thread):
     
     def _suppress_signals(self, process):
         signals = process.GetUnixSignals()
-        signals.SetShouldStop(11, False)
+        signals.SetShouldStop(30, False)
+        signals.SetShouldStop(31, False)
 
     def run(self):
         while True:
